@@ -45,7 +45,7 @@ func main() {
 	router.NewRouter()
 
 	log.Println("Listening on", conf.Config.Port)
-	err := http.ListenAndServe(fmt.Sprintf(":%d", conf.Config.Port), nil)
+	err := http.ListenAndServe(fmt.Sprintf("localhost:%d", conf.Config.Port), nil)
 	check(err)
 }
 
