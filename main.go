@@ -31,12 +31,6 @@ import (
 )
 
 func main() {
-
-	if len(os.Args) != 2 {
-		fmt.Fprintln(os.Stderr, "Error : missing argument\n\nUsage : ", os.Args[0], " <config file>")
-		os.Exit(1)
-	}
-
 	conf.Read()
 
 	dirExport := path.Dir(conf.Config.Export)

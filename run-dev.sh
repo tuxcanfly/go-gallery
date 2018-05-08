@@ -14,4 +14,4 @@ then
   fi
 fi
 
-godep go build && ./go-gallery conf/gallery.conf
+godep go build && ./go-gallery gallery.conf

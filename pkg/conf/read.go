@@ -39,7 +39,13 @@ var Config Configuration
 
 func Read() Configuration {
 	meta := make(map[string]string)
-	err := Load(os.Args[1], meta)
+	var file string
+	if len(os.Args) == 2 {
+		file = os.Args[1]
+	} else {
+		file = "gallery.conf"
+	}
+	err := Load(file, meta)
 	check(err)
 
 	Config.Export = meta["export"]

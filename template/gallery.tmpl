@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Dossier {{.Title}}</title>
+		<title>Gallery {{.Title}}</title>
 		<base href="{{.ContextRoot}}/" />
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="static/css/jquery.fancybox.css" media="screen" />
@@ -56,7 +56,7 @@
 				{{end}}
 			{{end}}
 			{{if or .Pictures .Videos}}
-				<div class="picture">Contenu de l'album '{{ .Title}}' <span>{{.Total}} médias</span></div>
+				<div class="picture">Album <span>{{.Total}} photos</span></div>
 				<div class="flex-container pictures">
 					{{range .Pictures}}<div class="flex-img lazy"><a class="fancybox fancybox.image" rel="group" href="small/{{ $.Folder }}{{ . }}" title="{{ . }}"><img src="static/img/blank.gif" data-src="thumb/{{ $.Folder }}{{ . }}" alt="{{ . }}" /></a></div>
 					{{end}}
@@ -65,7 +65,7 @@
 				</div>
 			{{end}}
 			{{ if and (not .Pictures) (not .Folders) (not .Videos)}}
-				<div class="nada">Aucun élément affichable</div>
+				<div class="nada">No displayable items.</div>
 			{{end}}
 			</div>
 		</div>
