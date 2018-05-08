@@ -91,14 +91,12 @@ func RenderDownload(w http.ResponseWriter, r *http.Request) {
 }
 
 func RenderUpload(w http.ResponseWriter, r *http.Request) {
-	imgs, err := imageupload.ProcessFiles(r, "files")
+	img, err := imageupload.Process(r, "file")
 	if err != nil {
 		http.Error(w, "invalid file", http.StatusUnprocessableEntity)
 		return
 	}
-	for _, img := range imgs {
-		img.Save(fmt.Sprintf("pics/%s", img.Filename))
-	}
+	img.Save(fmt.Sprintf("pics/%s", img.Filename))
 	http.Redirect(w, r, "/ui/", http.StatusMovedPermanently)
 }
 

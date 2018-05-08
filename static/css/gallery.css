@@ -1,7 +1,9 @@
 body {
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: Roboto, "Open Sans", sans-serif;
+  font-size: 20px;
   color: #555;
   padding-top: 60px;
+
 }
 
 a {
@@ -200,9 +202,12 @@ a:active, a:focus {
   cursor: default;
 }
 
-#upload img {
-  max-width: 125px;
-  max-height: 125px;
-  float: left;
-  margin-bottom:10px;
+.dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }

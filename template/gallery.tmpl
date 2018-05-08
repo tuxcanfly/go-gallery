@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="static/css/jquery.fancybox.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="static/css/gallery.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="static/css/tagmanager.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="static/css/dropzone.css" media="screen" />
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -69,10 +70,8 @@
 			{{end}}
 			</div>
 
-			<form method="POST" enctype="multipart/form-data" action="/upload/">
-			    Upload files: <input type="file" id="files" name="files" multiple accept="image/*"><br/>
+			<form method="POST" enctype="multipart/form-data" action="/upload/" class="dropzone">
 			    <div id="upload"></div>
-			    <input type="submit" value="Upload">
 			</form>
 
 		</div>
@@ -83,35 +82,19 @@
 		{{ end }}
 		};
 		</script>
-		<script>
-		  var selDiv = "";
-		  document.addEventListener("DOMContentLoaded", init, false);
-		  function init() {
-		    document.querySelector('#files').addEventListener('change', handleFileSelect, false);
-		    selDiv = document.querySelector("#selectedFiles");
-		  }
-		  function handleFileSelect(e) {
-		    if(!e.target.files || !window.FileReader) return;
-		    selDiv.innerHTML = "";
-		    var files = e.target.files;
-		    var filesArr = Array.prototype.slice.call(files);
-		    filesArr.forEach(function(f) {
-		      if(!f.type.match("image.*")) {
-			return;
-		      }
-		      var reader = new FileReader();
-		      reader.onload = function (e) {
-			var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
-			selDiv.innerHTML += html;
-		      }
-		      reader.readAsDataURL(f);
-		    });
-		  }
-		</script>
 		<script type="text/javascript" src="static/js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="static/js/jquery.fancybox-2.1.5.pack.js"></script>
 		<script type="text/javascript" src="static/js/gallery.js"></script>
 		<script type="text/javascript" src="static/js/tagmanager.js"></script>
 		<script type="text/javascript" src="static/js/jquery.lazy.min.js"></script>
+		<script type="text/javascript" src="static/js/dropzone.js"></script>
+		<script type="text/javascript">
+		    $(document).ready(function() {
+			Dropzone.autoDiscover = false;
+			$("form").dropzone({
+			    acceptedFiles: "image/*"
+			});
+		    });
+		</script>
 	</body>
 </html>
