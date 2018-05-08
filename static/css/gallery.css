@@ -199,3 +199,10 @@ a:active, a:focus {
 .tm-tag span {
   cursor: default;
 }
+
+#upload img {
+  max-width: 125px;
+  max-height: 125px;
+  float: left;
+  margin-bottom:10px;
+}

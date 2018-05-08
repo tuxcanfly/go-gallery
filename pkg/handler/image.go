@@ -18,12 +18,14 @@ along with GO gallery.  If not, see <http://www.gnu.org/licenses/>.
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"path"
 	"regexp"
 
 	"github.com/gorilla/mux"
+	imageupload "github.com/olahol/go-imageupload"
 	"gitlab.com/coliss86/go-gallery/pkg/conf"
 	"gitlab.com/coliss86/go-gallery/pkg/file"
 	"gitlab.com/coliss86/go-gallery/pkg/img"
@@ -86,6 +88,18 @@ func RenderDownload(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Disposition", "attachment; filename="+title)
 	serveFile(w, r, file.PathJoin(conf.Config.Images, img))
+}
+
+func RenderUpload(w http.ResponseWriter, r *http.Request) {
+	imgs, err := imageupload.ProcessFiles(r, "files")
+	if err != nil {
+		http.Error(w, "invalid file", http.StatusUnprocessableEntity)
+		return
+	}
+	for _, img := range imgs {
+		img.Save(fmt.Sprintf("pics/%s", img.Filename))
+	}
+	http.Redirect(w, r, "/ui/", http.StatusMovedPermanently)
 }
 
 func serveFile(w http.ResponseWriter, r *http.Request, file string) {

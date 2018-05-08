@@ -37,6 +37,7 @@ func NewRouter() *mux.Router {
 	router.HandleFunc(conf.Config.ContextRoot+"/small/{img:.*}", handler.RenderSmall)
 	router.HandleFunc(conf.Config.ContextRoot+"/download/{img:.*}", handler.RenderDownload)
 	router.HandleFunc(conf.Config.ContextRoot+"/img/{img:.*}", handler.RenderImg)
+	router.HandleFunc(conf.Config.ContextRoot+"/upload/", handler.RenderUpload)
 	router.HandleFunc(conf.Config.ContextRoot+"/", func(w http.ResponseWriter, r *http.Request) {
 		//redirecting to /ui/ when / is called
 		http.Redirect(w, r, conf.Config.ContextRoot+"/ui/", http.StatusMovedPermanently)
